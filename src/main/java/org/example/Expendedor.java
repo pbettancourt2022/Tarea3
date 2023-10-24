@@ -93,7 +93,10 @@ class Expendedor {
                 }
             }
         }
-        return producto;
+        if (producto != null) {
+            // Depositar el producto en un depósito especial
+            depósitoProducto.addElemento(producto);
+        }
     }
 
     /** Funciona similar a un Getter

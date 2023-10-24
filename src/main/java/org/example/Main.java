@@ -1,5 +1,10 @@
 package org.example;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 /**
  * Programa que representa la compra de un producto en una máquina expendedora
  * @author Pablo Bettancourt
@@ -18,95 +23,85 @@ public class Main {
         Moneda m = null;
         Comprador c = null;
         Moneda moneda;
-        /**
-         * En este caso se prueba con CocaCola, en la situación que haya suficiente dinero y haya producto
-         * También se prueba cuando hay suficiente dinero y no hay producto
-         * */
-        for (int i = 0; i < 3; i++) {
-            moneda = new Moneda1000();
-            try {
-                m= moneda;
-                c = new Comprador(m, Productos.COCACOLA.getNumero(), exp);
-                System.out.println(c.queBebiste() + " $" + c.cuantoVuelto());
-            } catch (NoHayProductoException e) {
-                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
-            } catch (PagoInsuficienteException e) {
-                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
-            } catch (PagoIncorrectoException e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
-        /**
-         * En este caso se prueba con Sprite, mismos casos que CocaCola, con la diferencia en que las Bebidas
-         * Tienen distinto precio
-         */
-        for (int i = 0; i < 3; i++) {
-            moneda = new Moneda1000();
-            try {
-                m= moneda;
-                c = new Comprador(m, Productos.SPRITE.getNumero(), exp);
-                System.out.println(c.queBebiste() + " $" + c.cuantoVuelto());
-            } catch (NoHayProductoException e) {
-                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
-            } catch (PagoInsuficienteException e) {
-                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
-            } catch (PagoIncorrectoException e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
-        /**
-         * En este caso se prueba para Fanta, donde el tipo de Moneda es incorrecto
-         */
-        for (int i = 0; i < 3; i++) {
-            moneda = null;
-            try {
-                m= moneda;
-                c = new Comprador(m, Productos.FANTA.getNumero(), exp);
-                System.out.println(c.queBebiste() + " $" + c.cuantoVuelto());
-            } catch (NoHayProductoException e) {
-                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
-            } catch (PagoInsuficienteException e) {
-                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
-            } catch (PagoIncorrectoException e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
-        /**
-         * Se prueba para Snickers, donde se ocupan los mismos casos que para CocaCola
-         */
-        for (int i = 0; i < 3; i++) {
-            moneda = new Moneda1000();
-            try {
-                m= moneda;
-                c = new Comprador(m, Productos.SNICKERS.getNumero(), exp);
-                System.out.println(c.queBebiste() + " $" + c.cuantoVuelto());
-            } catch (NoHayProductoException e) {
-                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
-            } catch (PagoInsuficienteException e) {
-                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
-            } catch (PagoIncorrectoException e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
-        /**
-         * Por último se prueba para Super8, donde el pago es insuficiente para llevar a cabo la compra
-         */
-        for (int i = 0; i < 3; i++) {
-            moneda = new Moneda100();
-            try {
-                m= moneda;
-                c = new Comprador(m, Productos.SUPER8.getNumero(), exp);
-                System.out.println(c.queBebiste() + " $" + c.cuantoVuelto());
-            } catch (NoHayProductoException e) {
-                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
-            } catch (PagoInsuficienteException e) {
-                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
-            } catch (PagoIncorrectoException e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
+        SwingUtilities.invokeLater(() -> {
+            JFrame frame = new JFrame("Máquina Expendedora");
+            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            PanelPrincipal panelPrincipal = new PanelPrincipal();
+            frame.add(panelPrincipal);
+            frame.pack();
+            frame.setVisible(true);
+        });
+
     }
 }
+class PanelPrincipal extends JPanel {
+    private PanelExpendedor expendedor;
+    private PanelComprador comprador;
+    public PanelPrincipal() {
+        this.setSize(800, 600);  // Tamaño del panel principal
+        this.setBackground(Color.WHITE);
+
+        // Crea y configura el PanelExpendedor
+        expendedor = new PanelExpendedor();
+        expendedor.setBounds(50, 50, 300, 400);  // Posición y tamaño del expendedor
+
+        // Crea y configura el PanelComprador
+        comprador = new PanelComprador();
+        comprador.setBounds(400, 50, 300, 400);  // Posición y tamaño del comprador
+
+        this.add(expendedor);
+        this.add(comprador);
 
 
+        // Agrega el MouseListener
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int x = e.getX();
+                int y = e.getY();
 
+                if (expendedor.getBounds().contains(x, y)) {
+                    expendedor.handleClick();  // Redirige el clic al PanelExpendedor
+                } else if (comprador.getBounds().contains(x, y)) {
+                    comprador.handleClick();  // Redirige el clic al PanelComprador
+                }
+            }
+        });
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        // Dibuja la máquina expendedora y el comprador
+        expendedor.paint(g);
+        comprador.paint(g);
+    }
+}
+class PanelExpendedor extends JPanel {
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        // Dibuja el expendedor y sus componentes (depósitos, productos, monedas, etc.) aquí
+    }
+
+    public void handleClick() {
+
+    }
+}
+class PanelComprador extends JPanel {
+    private int estado; // Variable de estado para controlar la secuencia cíclica
+
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g);
+        // Dibuja el comprador en función del estado actual
+    }
+
+    public void cambiarEstado() {
+        // Cambia el estado aquí
+    }
+
+    public void handleClick() {
+
+    }
+}
