@@ -32,16 +32,17 @@ class Expendedor {
 
     /**
      * Método que representa la función de un expendedor, la cual es vender los productos
-     * @param m moneda con la que se compra
+     *
+     * @param m    moneda con la que se compra
      * @param cual producto que se desea
-     * @return devuelve el producto, o null en el caso de que no hayan o el pago sea inferior al precio
      * @throws PagoIncorrectoException
      * @throws NoHayProductoException
      * @throws PagoInsuficienteException
      */
-    public Producto comprarProducto(Moneda m, int cual)throws PagoIncorrectoException, NoHayProductoException, PagoInsuficienteException  {
+    public void comprarProducto(Moneda m, int cual)throws PagoIncorrectoException, NoHayProductoException, PagoInsuficienteException  {
         Producto producto = null;
         Deposito temp = null;
+        DepositoProducto depositoProducto= new DepositoProducto();
         int precio = 0;
         /**
          * En este if statement se define cual es el producto seleccionado
@@ -95,7 +96,7 @@ class Expendedor {
         }
         if (producto != null) {
             // Depositar el producto en un depósito especial
-            depósitoProducto.addElemento(producto);
+            depositoProducto.addProducto(producto);
         }
     }
 
@@ -105,4 +106,20 @@ class Expendedor {
     public Moneda getVuelto() {
         return (Moneda) monVu.getElemento();
     }
+    public Producto getProducto(int cualProducto) {
+        if (cualProducto == Productos.COCACOLA.getNumero()) {
+            return (Producto) coca.getElemento();
+        } else if (cualProducto == Productos.SPRITE.getNumero()) {
+            return (Producto) sprite.getElemento();
+        } else if (cualProducto == Productos.FANTA.getNumero()) {
+            return (Producto) fanta.getElemento();
+        } else if (cualProducto == Productos.SNICKERS.getNumero()) {
+            return (Producto) snickers.getElemento();
+        } else if (cualProducto == Productos.SUPER8.getNumero()) {
+            return (Producto) super8.getElemento();
+        }
+        return null; // Devuelve null si no se encuentra el producto
+    }
+
 }
+

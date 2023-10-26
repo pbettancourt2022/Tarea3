@@ -20,7 +20,7 @@ class Comprador {
      */
     public Comprador(Moneda m, int cualProducto, Expendedor exp) throws NoHayProductoException, PagoInsuficienteException, PagoIncorrectoException {
         vuelto = 0;
-            Producto producto = exp.comprarProducto(m, cualProducto);
+        Producto producto = exp.getProducto(cualProducto);
 
             if (producto != null) {
                 sonido = producto.consumir();
