@@ -40,7 +40,7 @@ class Expendedor {
      * @throws PagoInsuficienteException
      */
     public void comprarProducto(Moneda m, int cual)throws PagoIncorrectoException, NoHayProductoException, PagoInsuficienteException  {
-        Producto producto = null;
+        Product producto = null;
         Deposito temp = null;
         DepositoProducto depositoProducto= new DepositoProducto();
         int precio = 0;
@@ -69,7 +69,7 @@ class Expendedor {
         } else if (m.getValor() > precio) {
             int valorMoneda = m.getValor();
             int valorVuelto = m.getValor() - precio;
-            producto = (Producto) temp.getElemento();
+            producto = (Product) temp.getElemento();
             if (producto == null) { // se deberia agregar en este punto la excepcion de que no hay producto
                 throw new NoHayProductoException(m, monVu);
             } else {
@@ -85,7 +85,7 @@ class Expendedor {
         }
         /** en este se define el caso en que el valor de la moneda sea igual al precio*/
         else if (m.getValor() == precio) {
-            producto = (Producto) temp.getElemento();
+            producto = (Product) temp.getElemento();
             if (producto == null) {
                 int valorMoneda = m.getValor();
                 while (valorMoneda != 0) {
@@ -106,17 +106,17 @@ class Expendedor {
     public Moneda getVuelto() {
         return (Moneda) monVu.getElemento();
     }
-    public Producto getProducto(int cualProducto) {
+    public Product getProducto(int cualProducto) {
         if (cualProducto == Productos.COCACOLA.getNumero()) {
-            return (Producto) coca.getElemento();
+            return (Product) coca.getElemento();
         } else if (cualProducto == Productos.SPRITE.getNumero()) {
-            return (Producto) sprite.getElemento();
+            return (Product) sprite.getElemento();
         } else if (cualProducto == Productos.FANTA.getNumero()) {
-            return (Producto) fanta.getElemento();
+            return (Product) fanta.getElemento();
         } else if (cualProducto == Productos.SNICKERS.getNumero()) {
-            return (Producto) snickers.getElemento();
+            return (Product) snickers.getElemento();
         } else if (cualProducto == Productos.SUPER8.getNumero()) {
-            return (Producto) super8.getElemento();
+            return (Product) super8.getElemento();
         }
         return null; // Devuelve null si no se encuentra el producto
     }

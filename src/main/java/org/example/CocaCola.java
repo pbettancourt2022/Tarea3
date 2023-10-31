@@ -1,4 +1,7 @@
 package org.example;
+
+import java.awt.*;
+
 /** Clase que hereda las propiedades de Producto a través de Bebida*/
 class CocaCola extends Bebida {
     /** Constructor de CocaCola, usando el

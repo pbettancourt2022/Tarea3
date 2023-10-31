@@ -1,6 +1,6 @@
 package org.example;
 /** Subclase de Producto, abarca al resto de dulces*/
-abstract class Dulce extends Producto{
+abstract class Dulce extends Product {
     /** Misma funcionalidad que en Producto*/
     private int serie;
 

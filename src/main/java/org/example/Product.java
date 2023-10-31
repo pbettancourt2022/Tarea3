@@ -1,15 +1,17 @@
 package org.example;
 
+import java.awt.*;
+
 /**
  * Super clase que abarca todos los productos dentro del proyecto
  */
-abstract class Producto{
+abstract class Product {
     /** Integer que tiene el fin de diferenciar el producto del resto de productos similiares */
     private int serie;
 
     /** Constructor de la clase, solamente le asigna valor a la variable
      * @param numSerie valor a asignar a serie*/
-    public Producto(int numSerie) {
+    public Product(int numSerie) {
         this.serie = numSerie;
     }
     /** Getter para serie*/
