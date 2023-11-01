@@ -23,6 +23,9 @@ class PanelPrincipal extends JPanel {
 
         this.add(expendedor);
         this.add(comprador);
+        Moneda100 moneda=new Moneda100();
+        expendedor.agregarMonedaVuelto(moneda);
+
 
 
         // Agrega el MouseListener
@@ -33,7 +36,7 @@ class PanelPrincipal extends JPanel {
                 int y = e.getY();
 
                 if (expendedor.getBounds().contains(x, y)) {
-                    expendedor.handleClick();  // Redirige el clic al PanelExpendedor
+                    expendedor.handleClick(x, y);  // Redirige el clic al PanelExpendedor
                 } else if (comprador.getBounds().contains(x, y)) {
                     comprador.handleClick();  // Redirige el clic al PanelComprador
                 }
