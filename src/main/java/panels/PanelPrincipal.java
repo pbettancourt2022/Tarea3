@@ -14,25 +14,28 @@ public class PanelPrincipal extends JPanel {
     private PanelComprador comprador;
 
     public PanelPrincipal(Expendedor exp) {
+        super();
         this.setBackground(Color.WHITE);
+        //los tres this de abajo los agregue para hacer funcionar el panel comprador
+        this.setLayout(new BorderLayout());
+        this.setBounds(100,200,100,150);
+        this.setPreferredSize(new Dimension(100,200));
+
 
         // Crea y configura el PanelExpendedor
         expendedor = new PanelExpendedor(exp);
         expendedor.setBounds(50, 50, 300, 400);  // Posición y tamaño del expendedor
 
         // Crea y configura el PanelComprador
-        comprador = new PanelComprador();
-        comprador.setBounds(400, 50, 300, 400);  // Posición y tamaño del comprador
+//        comprador = new PanelComprador();
 
         this.add(expendedor);
-        this.add(comprador);
+//        this.add(comprador);
         Moneda100 moneda=new Moneda100();
         expendedor.agregarMonedaVuelto(moneda);
 
 
 
-        // no veo la necesidad de usar un mouse listener aqui, si ves las instrucciones de la tarea nos dan como tiene que ser
-        // el panel principal
         /*
         // Agrega el MouseListener
         this.addMouseListener(new MouseAdapter() {
@@ -56,6 +59,6 @@ public class PanelPrincipal extends JPanel {
 
         // Dibuja la máquina expendedora y el comprador
         expendedor.paint(g);
-        comprador.paint(g);
+
     }
 }

@@ -7,7 +7,7 @@ import panels.Ventana;
  * @author Pablo Bettancourt
  * @author Javier Morales
  *
- * @version 0.9 20 de octubre 2023
+ * @version 0.91 02 de noviembre 2023
  */
 
 public class Main {
