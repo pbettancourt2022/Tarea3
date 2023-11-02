@@ -1,6 +1,8 @@
 package panels;
 
+import org.example.Expendedor;
 import org.example.Moneda;
+import org.example.Product;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,8 +16,10 @@ import java.util.List;
 public class PanelExpendedor extends JPanel implements MouseListener {
     private List<Moneda> monedasVuelto;
     private List<Moneda> monedasParaEliminar = new ArrayList<>();
+    private Expendedor expendedor;
 
-    public PanelExpendedor() {
+    public PanelExpendedor(Expendedor exp) {
+        this.expendedor = exp;
         monedasVuelto = new ArrayList<>();
     }
     public void agregarMonedaVuelto(Moneda moneda) {
@@ -49,6 +53,88 @@ public class PanelExpendedor extends JPanel implements MouseListener {
                 xMoneda += 20;
             }
         }
+        // Dibuja los productos en filas y columnas
+        int xProducto = 150;
+        int yProducto = 60;
+        int productosPorFila = expendedor.setNumproductos();
+
+
+        for (int i = 0; i < productosPorFila; i++) {
+            Product producto = expendedor.getProducto(i);
+
+            // Dibuja el producto en la posición actual (xProducto, yProducto)
+            // Puedes personalizar cómo se muestra el producto aquí
+            g.setColor(Color.red);
+            g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
+            g.setColor(Color.red);
+            g.fillRoundRect(xProducto, (yProducto+25), 50, 35, 10, 10);
+            g.setColor(Color.black);
+            g.fillRoundRect(xProducto, (yProducto+25), 50, 10, 10, 10);
+            // Calcula las coordenadas del siguiente producto en la fila actual
+            xProducto += 80;
+
+        }
+        xProducto = 150;
+        yProducto += 110;
+        for(int i = 0; i < productosPorFila; i++) {
+            Product producto = expendedor.getProducto(i);
+
+            // Dibuja el producto en la posición actual (xProducto, yProducto)
+            // Puedes personalizar cómo se muestra el producto aquí
+            g.setColor(Color.green);
+            g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
+            g.setColor(Color.green);
+            g.fillRoundRect(xProducto, (yProducto+25), 50, 35, 10, 10);
+            g.setColor(Color.white);
+            g.fillRoundRect(xProducto, (yProducto+25), 50, 10, 10, 10);
+            xProducto += 80;
+        }
+        xProducto = 150;
+        yProducto += 110;
+        for(int i = 0; i < productosPorFila; i++) {
+            Product producto = expendedor.getProducto(i);
+
+            // Dibuja el producto en la posición actual (xProducto, yProducto)
+            // Puedes personalizar cómo se muestra el producto aquí
+            g.setColor(Color.orange);
+            g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
+            g.setColor(Color.orange);
+            g.fillRoundRect(xProducto, (yProducto+25), 50, 35, 10, 10);
+            g.setColor(Color.black);
+            g.fillRoundRect(xProducto, (yProducto+25), 50, 10, 10, 10);
+            xProducto += 80;
+        }
+        xProducto = 150;
+        yProducto += 110;
+        for(int i = 0; i < productosPorFila; i++) {
+            Product producto = expendedor.getProducto(i);
+
+            // Dibuja el producto en la posición actual (xProducto, yProducto)
+            // Puedes personalizar cómo se muestra el producto aquí
+            g.setColor(Color.BLACK);
+            g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
+            g.setColor(Color.BLACK);
+            g.fillRoundRect(xProducto, (yProducto+25), 50, 35, 10, 10);
+            g.setColor(Color.white);
+            g.fillRoundRect(xProducto, (yProducto+25), 50, 10, 10, 10);
+            xProducto += 80;
+        }
+        xProducto = 150;
+        yProducto += 110;
+        for(int i = 0; i < productosPorFila; i++) {
+            Product producto = expendedor.getProducto(i);
+
+            // Dibuja el producto en la posición actual (xProducto, yProducto)
+            // Puedes personalizar cómo se muestra el producto aquí
+            g.setColor(Color.BLACK);
+            g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
+            g.setColor(Color.BLACK);
+            g.fillRoundRect(xProducto, (yProducto+25), 50, 35, 10, 10);
+            g.setColor(Color.red);
+            g.fillRoundRect(xProducto, (yProducto+25), 50, 10, 10, 10);
+            xProducto += 80;
+        }
+
     }
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();

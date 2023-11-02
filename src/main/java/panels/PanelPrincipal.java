@@ -1,5 +1,6 @@
 package panels;
 
+import org.example.Expendedor;
 import org.example.Moneda100;
 
 import javax.swing.*;
@@ -12,11 +13,11 @@ public class PanelPrincipal extends JPanel {
     private PanelExpendedor expendedor;
     private PanelComprador comprador;
 
-    public PanelPrincipal() {
+    public PanelPrincipal(Expendedor exp) {
         this.setBackground(Color.WHITE);
 
         // Crea y configura el PanelExpendedor
-        expendedor = new PanelExpendedor();
+        expendedor = new PanelExpendedor(exp);
         expendedor.setBounds(50, 50, 300, 400);  // Posición y tamaño del expendedor
 
         // Crea y configura el PanelComprador

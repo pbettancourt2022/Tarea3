@@ -11,6 +11,7 @@ public class Expendedor {
     private Deposito snickers;
     private Deposito super8;
     private Deposito monVu;
+    private int numproductos;
 
     /**
      * Constructor de Expendedor, crea los depositos y llena los de los productos
@@ -20,6 +21,7 @@ public class Expendedor {
         coca = new Deposito(); sprite = new Deposito();
         fanta = new Deposito(); snickers = new Deposito();
         super8 = new Deposito(); monVu = new Deposito();
+        this.numproductos=numProductos;
         for (int i = 0; i < numProductos; i++) {
             coca.addElemento(new CocaCola(i + 100));
             sprite.addElemento(new Sprite(i + 200));
@@ -119,6 +121,9 @@ public class Expendedor {
             return (Product) super8.getElemento();
         }
         return null; // Devuelve null si no se encuentra el producto
+    }
+     public int setNumproductos(){
+        return numproductos;
     }
 
 }
