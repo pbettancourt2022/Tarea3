@@ -1,16 +1,18 @@
-package org.example;
+package panels;
+
+import org.example.Moneda100;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-class PanelPrincipal extends JPanel {
+public class PanelPrincipal extends JPanel {
     private PanelExpendedor expendedor;
     private PanelComprador comprador;
 
     public PanelPrincipal() {
-        this.setSize(1000, 800);  // Tamaño del panel principal
         this.setBackground(Color.WHITE);
 
         // Crea y configura el PanelExpendedor
@@ -28,6 +30,9 @@ class PanelPrincipal extends JPanel {
 
 
 
+        // no veo la necesidad de usar un mouse listener aqui, si ves las instrucciones de la tarea nos dan como tiene que ser
+        // el panel principal
+        /*
         // Agrega el MouseListener
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -41,7 +46,7 @@ class PanelPrincipal extends JPanel {
                     comprador.handleClick();  // Redirige el clic al PanelComprador
                 }
             }
-        });
+        })*/
     }
 
     @Override

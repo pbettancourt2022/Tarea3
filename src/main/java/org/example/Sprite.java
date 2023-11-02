@@ -1,6 +1,6 @@
 package org.example;
 /** Representa la Bebida Sprite, heredando las propiedades de la superclase*/
-class Sprite extends Bebida {
+public class Sprite extends Bebida {
     /** Constructor de Sprite, utiliza
      * @param numSerie para iniciar las variables
      */

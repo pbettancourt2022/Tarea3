@@ -1,11 +1,6 @@
 package org.example;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.List;
+import panels.Ventana;
 
 /**
  * Programa que representa la compra de un producto en una máquina expendedora
@@ -18,16 +13,10 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         /**
-         * Notar que a continuación se representa cómo ocurriría una cierta cantidad de compras con condiciones diferentes
-         * Instanciando las clases Moneda, Comprador y Expendedor para ello
+         * Notar que, según las instrucciones de la tarea, lo único necesario en el main es
+         * una instancia de Ventana
          * */
-        Expendedor exp = new Expendedor(2);
-        Moneda m = null;
-        Comprador c = null;
-        Moneda moneda;
         Ventana v = new Ventana();
-
-
     }
 }
 

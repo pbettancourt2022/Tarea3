@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Super clase que abarca todos los productos dentro del proyecto
  */
-abstract class Product {
+public abstract class Product {
     /** Integer que tiene el fin de diferenciar el producto del resto de productos similiares */
     private int serie;
 

@@ -1,7 +1,7 @@
 package org.example;
 
 /** Clase abstracta que representa a una Moneda */
-abstract class Moneda implements Comparable<Moneda>{
+public abstract class Moneda implements Comparable<Moneda>{
     /** Constructor de moneda, no tiene ninguna particularidad */
     public Moneda() {}
     /** Getter de serie, ocupa la direccion de memoria como serie */

@@ -1,14 +1,17 @@
-package org.example;
+package panels;
+
+import org.example.Moneda;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-class PanelExpendedor extends JPanel {
+public class PanelExpendedor extends JPanel implements MouseListener {
     private List<Moneda> monedasVuelto;
     private List<Moneda> monedasParaEliminar = new ArrayList<>();
 
@@ -69,6 +72,10 @@ class PanelExpendedor extends JPanel {
             }
         }
     }
+    public void mousePressed(MouseEvent e){}
+    public void mouseReleased(MouseEvent e){}
+    public void mouseEntered(MouseEvent e){}
+    public void mouseExited(MouseEvent e){}
     public void handleClick(int x, int y) {
         for (Moneda moneda : monedasVuelto) {
             if (monedasParaEliminar.contains(moneda)) {

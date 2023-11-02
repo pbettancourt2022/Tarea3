@@ -3,7 +3,7 @@ package org.example;
 /** Representa al expendedor en el escenario, matiene almecenes de los productos, de él se compran los Productos
  * y de él se obtiene el vuelto
  */
-class Expendedor {
+public class Expendedor {
     /** todos los Depositos representan a un producto, mientras que el último representa al deposito de monedas de vuelto*/
     private Deposito coca;
     private Deposito sprite;

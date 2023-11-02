@@ -1,6 +1,6 @@
 package org.example;
 /** Clase que representa a un Snickers, hereda sus propiedades de la superclase Dulce */
-class Snickers extends Dulce {
+public class Snickers extends Dulce {
     /** Constructor de Snickers, utiliza
      * @param numSerie para darle valor a serie, heredada de la superclase
      */

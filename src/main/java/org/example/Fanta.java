@@ -1,6 +1,6 @@
 package org.example;
 /** Hereda las propiedades de Producto a través de Bebida*/
-class Fanta extends Bebida {
+public class Fanta extends Bebida {
     /** Constructor de Fanta, utiliza
      * @param numSerie para iniciar el valor de serie, heredado de la superclase
      */

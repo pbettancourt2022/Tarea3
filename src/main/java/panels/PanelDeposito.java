@@ -1,8 +1,10 @@
-package org.example;
+package panels;
+
+import panels.PanelExpendedor;
 
 import javax.swing.*;
 
-class PanelDeposito extends JPanel {
+public class PanelDeposito extends JPanel {
     private int indice;
     private PanelExpendedor expendedor;
 

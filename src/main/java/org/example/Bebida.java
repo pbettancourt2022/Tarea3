@@ -1,6 +1,6 @@
 package org.example;
 /** Subclase de Producto, abarca al resto de bebidas */
-abstract class Bebida extends Product {
+public abstract class Bebida extends Product {
     /** Misma funcionalidad que en la superclase */
     private int serie;
 

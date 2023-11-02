@@ -1,6 +1,6 @@
 package org.example;
 /** Enumeración de los Productos dentro del proyecto, contiene su valor y su precio*/
-enum Productos {
+public enum Productos {
     COCACOLA(1, 500),
     SPRITE(2, 600),
     FANTA(3, 600),

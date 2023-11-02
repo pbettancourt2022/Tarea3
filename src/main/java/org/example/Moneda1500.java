@@ -1,7 +1,7 @@
 package org.example;
 
 /** Representa a una moneda de 1500, hereda propiedades de Moneda*/
-class Moneda1500 extends Moneda implements Comparable<Moneda>{
+public class Moneda1500 extends Moneda implements Comparable<Moneda>{
     /** Constructor de Moneda500, hereda propiedades de Moneda*/
     public Moneda1500() {
             super();

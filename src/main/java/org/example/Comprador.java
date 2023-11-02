@@ -3,7 +3,7 @@ package org.example;
 /** Representa al comprador en este escenario, compra un producto del expendedor, recibe un vuelto y luego consume
  * el producto, dando el nombre de aquel
  */
-class Comprador {
+public class Comprador {
     /** String que almacena el nombre del producto */
     private String sonido;
     /** Integer que almacena el vuelto */

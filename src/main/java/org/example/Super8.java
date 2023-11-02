@@ -1,6 +1,6 @@
 package org.example;
 /** Representa a un Super8, hereda sus propiedades de Dulce*/
-class Super8 extends Dulce {
+public class Super8 extends Dulce {
     /** Constructor de super8,
      * @param numSerie es utilizado para darle valor a las variables
      */

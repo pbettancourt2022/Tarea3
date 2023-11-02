@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /** La siguiente clase tiene el propósito de almacenar los distintos Productos en el proyecto, notar que
  * se ocupa parámetro genérico T para definirla*/
-class Deposito<T> {
+public class Deposito<T> {
     /**
      * Esta ArrayList es la que guarda los distintos productos, ocupando un parámetro genérico T
      */
