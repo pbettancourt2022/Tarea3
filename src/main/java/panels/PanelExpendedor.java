@@ -29,7 +29,7 @@ public class PanelExpendedor extends JPanel implements MouseListener {
     public void paint(Graphics g) {
         super.paint(g);
         g.setColor(Color.darkGray);
-        g.fillRect(100,600,1200,120);//Suelo
+        g.fillRect(100,570,1200,150);//Suelo
         g.setColor(Color.darkGray);
         g.fillRect(100,20,1200,20);//Techo
         g.setColor(Color.darkGray);
@@ -39,13 +39,22 @@ public class PanelExpendedor extends JPanel implements MouseListener {
         g.setColor(Color.darkGray);
         g.fillRect(1300,20,20,700);//Lado der
         g.setColor(Color.BLACK);
-        g.fillRect(1000,650,230,50);//Monedas Vuelto
+        g.fillRect(1000,620,230,50);//Monedas Vuelto
         g.setColor(Color.BLACK);
-        g.fillRect(400,650,230,50);//Producto comprado
+        g.fillRect(400,620,230,50);//Producto comprado
+        g.setColor(Color.darkGray);
+        g.fillRect(100,130,800,10);
+        int yBarras=130;
+        for(int i = 0; i < 5; i++){
+            g.setColor(Color.darkGray);
+            g.fillRect(100,yBarras,800,10);
+            yBarras=yBarras+110;
+
+        }
         // Dibuja el expendedor y sus componentes (depósitos, productos, monedas, etc.) aquí
         // Dibuja las monedas de vuelto
         int xMoneda = 1000;  // Coordenadas iniciales para las monedas de vuelto
-        int yMoneda = 660;
+        int yMoneda = 635;
         for (Moneda moneda : monedasVuelto) {
             if (!monedasParaEliminar.contains(moneda)) {
                 g.setColor(Color.YELLOW);
@@ -137,47 +146,35 @@ public class PanelExpendedor extends JPanel implements MouseListener {
 
     }
     public void mouseClicked(MouseEvent e) {
-        int x = e.getX();
-        int y = e.getY();
 
-        // Verifica si el clic ocurrió en una moneda de vuelto
-        for (Moneda moneda : monedasVuelto) {
-            if (monedasParaEliminar.contains(moneda)) {
-                continue;  // Si ya se debe eliminar, salta al siguiente
-            }
-
-            // Calcula las coordenadas donde se encuentra la moneda
-            int xMoneda = 1000 + 25 * monedasVuelto.indexOf(moneda);
-            int yMoneda = 660;
-
-            if (x >= xMoneda && x <= xMoneda + 20 && y >= yMoneda && y <= yMoneda + 20) {
-                // El clic ocurrió en esta moneda, así que márcala para eliminar
-                monedasParaEliminar.add(moneda);
-                repaint();  // Vuelve a pintar el panel para que la moneda desaparezca
-                break;  // Puedes romper el bucle si ya encontraste la moneda clicada
-            }
-        }
     }
     public void mousePressed(MouseEvent e){}
     public void mouseReleased(MouseEvent e){}
     public void mouseEntered(MouseEvent e){}
     public void mouseExited(MouseEvent e){}
     public void handleClick(int x, int y) {
+        System.out.println("handleClick llamado con x=" + x + " y=" + y);
+        int i=0;
         for (Moneda moneda : monedasVuelto) {
+
             if (monedasParaEliminar.contains(moneda)) {
                 continue;  // Si ya se debe eliminar, salta al siguiente
             }
 
             // Calcula las coordenadas donde se encuentra la moneda
-            int xMoneda = 1000 + 25 * monedasVuelto.indexOf(moneda);
-            int yMoneda = 660;
-
+            int xMoneda = 1000+ (20*i);
+            int yMoneda = 635;
+            System.out.println(moneda.getValor());
             if (x >= xMoneda && x <= xMoneda + 20 && y >= yMoneda && y <= yMoneda + 20) {
+                System.out.println("Clic en moneda detectado. Marcando para eliminar.");
                 // El clic ocurrió en esta moneda, así que márcala para eliminar
                 monedasParaEliminar.add(moneda);
                 repaint();  // Vuelve a pintar el panel para que la moneda desaparezca
                 break;  // Puedes romper el bucle si ya encontraste la moneda clicada
             }
+            i++;
         }
     }
+
+
 }

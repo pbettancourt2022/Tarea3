@@ -31,26 +31,25 @@ public class PanelPrincipal extends JPanel {
 
         this.add(expendedor);
 //        this.add(comprador);
-        Moneda100 moneda=new Moneda100();
-        expendedor.agregarMonedaVuelto(moneda);
+        for(int i=0;i<5;i++){
+            Moneda100 moneda=new Moneda100();
+            expendedor.agregarMonedaVuelto(moneda);
+        }
 
 
 
-        /*
+
+
         // Agrega el MouseListener
-        this.addMouseListener(new MouseAdapter() {
+        expendedor.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int x = e.getX();
                 int y = e.getY();
 
-                if (expendedor.getBounds().contains(x, y)) {
-                    expendedor.handleClick(x, y);  // Redirige el clic al PanelExpendedor
-                } else if (comprador.getBounds().contains(x, y)) {
-                    comprador.handleClick();  // Redirige el clic al PanelComprador
-                }
+                expendedor.handleClick(x, y);
             }
-        })*/
+        });
     }
 
     @Override
