@@ -37,11 +37,12 @@ public class Expendedor {
      *
      * @param m    moneda con la que se compra
      * @param cual producto que se desea
+     * @return
      * @throws PagoIncorrectoException
      * @throws NoHayProductoException
      * @throws PagoInsuficienteException
      */
-    public void comprarProducto(Moneda m, int cual)throws PagoIncorrectoException, NoHayProductoException, PagoInsuficienteException  {
+    public Product comprarProducto(Moneda m, int cual)throws PagoIncorrectoException, NoHayProductoException, PagoInsuficienteException  {
         Product producto = null;
         Deposito temp = null;
         DepositoProducto depositoProducto= new DepositoProducto();
@@ -100,6 +101,7 @@ public class Expendedor {
             // Depositar el producto en un depósito especial
             depositoProducto.addProducto(producto);
         }
+        return producto;
     }
 
     /** Funciona similar a un Getter

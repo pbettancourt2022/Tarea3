@@ -17,6 +17,23 @@ public class Main {
          * una instancia de Ventana
          * */
         Expendedor exp = new Expendedor(9);
+        Moneda m= null;
+        Comprador c = null;
+        Moneda moneda;
+        for (int i = 0; i < 3; i++) {
+            moneda = new Moneda1000();
+            try {
+                m= moneda;
+                c = new Comprador(m, Productos.COCACOLA.getNumero(), exp);
+                System.out.println(c.queBebiste() + " $" + c.cuantoVuelto());
+            } catch (NoHayProductoException e) {
+                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
+            } catch (PagoInsuficienteException e) {
+                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
+            } catch (PagoIncorrectoException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
         Ventana v = new Ventana(exp);
     }
 }
