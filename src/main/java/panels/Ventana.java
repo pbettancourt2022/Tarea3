@@ -14,7 +14,7 @@ public class Ventana extends JFrame {
          * hay que cambiar new BorderLayout() por null para que panel comprador funcione,sin embargo con ese cambio
          * panel expendedor deja de funcionar, vere que puedo arreglar cuando despierte
          */
-        setLayout(new BorderLayout());
+        setLayout(null);
 
         PanelPrincipal panelPrincipal = new PanelPrincipal(exp);
         add(panelPrincipal);

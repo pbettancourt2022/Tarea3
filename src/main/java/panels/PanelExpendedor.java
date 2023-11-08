@@ -20,6 +20,7 @@ public class PanelExpendedor extends JPanel implements MouseListener {
 
     public PanelExpendedor(Expendedor exp) {
         this.expendedor = exp;
+        this.setLayout(new BorderLayout());
         monedasVuelto = new ArrayList<>();
     }
     public void agregarMonedaVuelto(Moneda moneda) {

@@ -16,21 +16,22 @@ public class PanelPrincipal extends JPanel {
     public PanelPrincipal(Expendedor exp) {
         super();
         this.setBackground(Color.WHITE);
-        //los tres this de abajo los agregue para hacer funcionar el panel comprador
-        this.setLayout(new BorderLayout());
-        this.setBounds(100,200,100,150);
-        this.setPreferredSize(new Dimension(100,200));
+        this.setLayout(null);
+        this.setBounds(0,0,1920,1080);
+        this.setPreferredSize(new Dimension(1920,1080));
 
 
-        // Crea y configura el PanelExpendedor
+        // Crea, configura y agrega el PanelExpendedor
         expendedor = new PanelExpendedor(exp);
-        expendedor.setBounds(50, 50, 300, 400);  // Posición y tamaño del expendedor
+        expendedor.setBounds(0, 0, 1920, 1080);
+        this.add(expendedor);
 
         // Crea y configura el PanelComprador
-//        comprador = new PanelComprador();
+        comprador = new PanelComprador();
+        comprador.setBounds(1100,100,100,180);
 
-        this.add(expendedor);
-//        this.add(comprador);
+
+        this.add(comprador);
         for(int i=0;i<5;i++){
             Moneda100 moneda=new Moneda100();
             expendedor.agregarMonedaVuelto(moneda);
@@ -41,6 +42,8 @@ public class PanelPrincipal extends JPanel {
 
 
         // Agrega el MouseListener
+        // este mouse listener incluye toda la ventana, comentado por mientras
+        /*
         expendedor.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -50,6 +53,7 @@ public class PanelPrincipal extends JPanel {
                 expendedor.handleClick(x, y);
             }
         });
+        */
     }
 
     @Override
