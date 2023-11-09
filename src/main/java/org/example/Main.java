@@ -1,6 +1,7 @@
 package org.example;
 
 import panels.Ventana;
+import panels.PanelExpendedor;
 
 /**
  * Programa que representa la compra de un producto en una máquina expendedora
@@ -35,6 +36,7 @@ public class Main {
             }
         }
         Ventana v = new Ventana(exp,c);
+
     }
 }
 

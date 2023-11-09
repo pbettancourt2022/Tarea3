@@ -23,42 +23,38 @@ public class PanelPrincipal extends JPanel {
         this.setPreferredSize(new Dimension(1920,1080));
 
 
+
+        comprador = new PanelComprador();
+        comprador.setPreferredSize(new Dimension(380, 530));
+        comprador.setBounds(920, 40, 380, 530);
+        this.add(comprador);
         // Crea, configura y agrega el PanelExpendedor
         expendedor = new PanelExpendedor(exp);
         expendedor.setBounds(0, 0, 1920, 1080);
         this.add(expendedor);
 
         // Crea y configura el PanelComprador
-        comprador = new PanelComprador();
-        comprador.setBounds(1100,100,100,180);
+
 
         //Se calcula cuantas monedas deben de haber en el vuelto
         int vuel=c.cuantoVuelto()/100;
-        for (int i = 0; i < vuel; i++) {
-            Moneda100 moneda = new Moneda100();
-            expendedor.agregarMonedaVuelto(moneda);
-        }
-        this.add(comprador);
-
-
-
-
-
+//        for (int i = 0; i < vuel; i++) {
+//            Moneda100 moneda = new Moneda100();
+//            expendedor.agregarMonedaVuelto(moneda);
+//        }
 
 
 
         // Agrega el MouseListener
-        // este mouse listener incluye toda la ventana, comentado por mientras
-
-        expendedor.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                int x = e.getX();
-                int y = e.getY();
-
-                expendedor.handleClick(x, y);
-            }
-        });
+//        expendedor.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                int x = e.getX();
+//                int y = e.getY();
+//
+//                expendedor.handleClick(x, y);
+//            }
+//        });
 
 
     }
@@ -68,8 +64,10 @@ public class PanelPrincipal extends JPanel {
         super.paint(g);
 
         // Dibuja la máquina expendedora y el comprador
-        expendedor.paint(g);
+//        expendedor.paint(g);
 
     }
+    public PanelExpendedor getExpendedor(){return expendedor;}
+    public PanelComprador getComprador(){return comprador;}
 
 }

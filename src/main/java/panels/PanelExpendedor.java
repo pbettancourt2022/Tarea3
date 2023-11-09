@@ -30,7 +30,7 @@ public class PanelExpendedor extends JPanel implements MouseListener {
         productoAMover = null;
 
 
-        // Agrega productos a la lista de productos disponibles (debes adaptar esto según tu lógica)
+        // Agrega productos a la lista de productos disponibles
         for(int i = 0; i < expendedor.setNumproductos(); i++){
             productosDisponibles.add(new CocaCola(i + 100));
         }
@@ -57,6 +57,7 @@ public class PanelExpendedor extends JPanel implements MouseListener {
                 productosDisponibles.remove(0);
                 xDestino = 100;
                 yDestino = 100;
+
                 repaint();
 
             }
@@ -260,5 +261,7 @@ public class PanelExpendedor extends JPanel implements MouseListener {
 
 
 
-
+    public List<Product> getProductosDisponibles(){
+        return productosDisponibles;
+    }
 }
