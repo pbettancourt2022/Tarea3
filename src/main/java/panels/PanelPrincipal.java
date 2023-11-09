@@ -1,6 +1,8 @@
 package panels;
 
+import org.example.Comprador;
 import org.example.Expendedor;
+import org.example.Moneda;
 import org.example.Moneda100;
 
 import javax.swing.*;
@@ -13,7 +15,7 @@ public class PanelPrincipal extends JPanel {
     private PanelExpendedor expendedor;
     private PanelComprador comprador;
 
-    public PanelPrincipal(Expendedor exp) {
+    public PanelPrincipal(Expendedor exp, Comprador c) {
         super();
         this.setBackground(Color.WHITE);
         this.setLayout(null);
@@ -30,12 +32,16 @@ public class PanelPrincipal extends JPanel {
         comprador = new PanelComprador();
         comprador.setBounds(1100,100,100,180);
 
-
-        this.add(comprador);
-        for(int i=0;i<5;i++){
-            Moneda100 moneda=new Moneda100();
+        //Se calcula cuantas monedas deben de haber en el vuelto
+        int vuel=c.cuantoVuelto()/100;
+        for (int i = 0; i < vuel; i++) {
+            Moneda100 moneda = new Moneda100();
             expendedor.agregarMonedaVuelto(moneda);
         }
+        this.add(comprador);
+
+
+
 
 
 

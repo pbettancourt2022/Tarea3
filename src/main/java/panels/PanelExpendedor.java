@@ -22,6 +22,7 @@ public class PanelExpendedor extends JPanel implements MouseListener {
     private int yDestino; // Coordenada Y de destino
 
     public PanelExpendedor(Expendedor exp) {
+        System.out.println(exp.getVuelto());
         this.expendedor = exp;
         this.setLayout(new BorderLayout());
         monedasVuelto = new ArrayList<>();
@@ -52,7 +53,6 @@ public class PanelExpendedor extends JPanel implements MouseListener {
         panelBoton.add(botonMoverProducto);
         botonMoverProducto.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                // Establece el producto que deseas mover y las coordenadas de destino
                 productoAMover = productosDisponibles.get(0);  // Esto seleccionará el primer producto disponible, adapta según tus necesidades
                 productosDisponibles.remove(0);
                 xDestino = 100;
@@ -251,7 +251,7 @@ public class PanelExpendedor extends JPanel implements MouseListener {
             i++;
         }
         if (x >= 490 && x <= 490 + 50 && y >= 630 && y <= 630 + 40){
-            System.out.println("La bebida es: "+productoAMover.getTipo());
+            System.out.println("La bebida es: "+productoAMover.getTipo()+" y su numero de serie es: "+productoAMover.getSerie());
             productoAMover=null;
             repaint();
         }

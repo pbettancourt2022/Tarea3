@@ -21,7 +21,7 @@ public class Main {
         Comprador c = null;
         Moneda moneda;
         for (int i = 0; i < 3; i++) {
-            moneda = new Moneda1000();
+            moneda = new Moneda1500();
             try {
                 m= moneda;
                 c = new Comprador(m, Productos.COCACOLA.getNumero(), exp);
@@ -34,7 +34,7 @@ public class Main {
                 System.out.println("Error: " + e.getMessage());
             }
         }
-        Ventana v = new Ventana(exp);
+        Ventana v = new Ventana(exp,c);
     }
 }
 

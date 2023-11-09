@@ -1,5 +1,6 @@
 package panels;
 
+import org.example.Comprador;
 import org.example.Expendedor;
 
 import javax.swing.ImageIcon;
@@ -8,7 +9,7 @@ import java.awt.*;
 
 public class Ventana extends JFrame {
 
-    public Ventana(Expendedor exp){
+    public Ventana(Expendedor exp, Comprador c){
         super("Máquina Expendedora");
         /**
          * hay que cambiar new BorderLayout() por null para que panel comprador funcione,sin embargo con ese cambio
@@ -16,7 +17,7 @@ public class Ventana extends JFrame {
          */
         setLayout(null);
 
-        PanelPrincipal panelPrincipal = new PanelPrincipal(exp);
+        PanelPrincipal panelPrincipal = new PanelPrincipal(exp,c);
         add(panelPrincipal);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
