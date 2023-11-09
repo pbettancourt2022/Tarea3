@@ -43,7 +43,7 @@ public class PanelPrincipal extends JPanel {
 
         // Agrega el MouseListener
         // este mouse listener incluye toda la ventana, comentado por mientras
-        /*
+
         expendedor.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -53,7 +53,8 @@ public class PanelPrincipal extends JPanel {
                 expendedor.handleClick(x, y);
             }
         });
-        */
+
+
     }
 
     @Override
@@ -64,4 +65,5 @@ public class PanelPrincipal extends JPanel {
         expendedor.paint(g);
 
     }
+
 }

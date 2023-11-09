@@ -9,6 +9,7 @@ public abstract class Product {
     /** Integer que tiene el fin de diferenciar el producto del resto de productos similiares */
     private int serie;
 
+
     /** Constructor de la clase, solamente le asigna valor a la variable
      * @param numSerie valor a asignar a serie*/
     public Product(int numSerie) {
