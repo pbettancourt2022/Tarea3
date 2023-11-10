@@ -1,4 +1,7 @@
 package panels;
+import org.example.Moneda100;
+import org.example.Moneda1000;
+import org.example.Moneda500;
 import org.example.Productos;
 
 import javax.swing.*;
@@ -125,19 +128,46 @@ public class PanelComprador extends JPanel {
         m1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                faltante = Integer.parseInt((lPago2.getText()));
+                if(faltante != 0){
+                    faltante -= 100;
+                    lPago2.setText(String.valueOf(faltante));
+                    expendedor.getMDeposito().addElemento(new Moneda100());
+                    if(faltante == 0 && seleccion != 0){
+                        lPago1.setText("Pagado");
+                        lPago2.setText(null);
+                    }
+                }
             }
         });
         m2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                faltante = Integer.parseInt((lPago2.getText()));
+                if(faltante != 0){
+                    faltante -= 500;
+                    lPago2.setText(String.valueOf(faltante));
+                    expendedor.getMDeposito().addElemento(new Moneda500());
+                    if(faltante <= 0 && seleccion != 0){
+                        lPago1.setText("Pagado");
+                        lPago2.setText(null);
+                    }
+                }
             }
         });
         m3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                faltante = Integer.parseInt((lPago2.getText()));
+                if(faltante != 0){
+                    faltante -= 1000;
+                    lPago2.setText(String.valueOf(faltante));
+                    expendedor.getMDeposito().addElemento(new Moneda1000());
+                    if(faltante <= 0 && seleccion != 0){
+                        lPago1.setText("Pagado");
+                        lPago2.setText(null);
+                    }
+                }
             }
         });
 
@@ -150,12 +180,19 @@ public class PanelComprador extends JPanel {
         // Boton para comprar
         JPanel panelBoton = new JPanel(null);
         panelBoton.setBounds(0,480,380,50);
-        JButton botonMoverProducto = new JButton("Mover Producto");
+        JButton botonMoverProducto = new JButton("Comprar");
         botonMoverProducto.setBounds(0,0,380,50);
         panelBoton.add(botonMoverProducto);
         botonMoverProducto.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
-                expendedor.botonCompra();
+                if(faltante <= 0 && seleccion != 0) {
+                    expendedor.botonCompra();
+                    expendedor.vuelto(faltante);
+                    PanelComprador.this.repaint();
+                    repaint();
+
+                }
+                PanelComprador.this.repaint();
                 repaint();
             }
         });
@@ -164,10 +201,14 @@ public class PanelComprador extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paint(g);
+
     }
 
+    /** Recibe el click desde PanelPrincipal y repinta el panel
+     * @param x coordenada x del click
+     * @param y coordenada y del click
+     */
     public void handleClick(int x, int y){
-
         repaint();
     }
 

@@ -20,8 +20,11 @@ public class PanelExpendedor extends JPanel{
     private Deposito<Moneda> mDeposito;
     private Expendedor expendedor;
     private Product productoAMover;
-    private int xDestino; // Coordenada X de destino
-    private int yDestino; // Coordenada Y de destino
+    /** Coordenada X de destino para el deposito de bebidas */
+    private int xDestino;
+    /** Coordenada Y de destino para el deposito de bebidas */
+    private int yDestino;
+
 
     public PanelExpendedor(Expendedor exp) {
         System.out.println(exp.getVuelto());
@@ -211,8 +214,6 @@ public class PanelExpendedor extends JPanel{
     }
 
     public void handleClick(int x, int y) {
-
-        System.out.println("handleClick llamado con x=" + x + " y=" + y);
         int i=0;
         for (Moneda moneda : monedasVuelto) {
 
@@ -228,7 +229,7 @@ public class PanelExpendedor extends JPanel{
                 // El clic ocurrió en esta moneda, así que márcala para eliminar
                 monedasParaEliminar.add(moneda);
                 repaint();  // Vuelve a pintar el panel para que la moneda desaparezca
-                System.out.println("El valor de la modea es: $"+moneda.getValor());
+                System.out.println("El valor de la moneda es: $"+moneda.getValor());
                 break;  // Puedes romper el bucle si ya encontraste la moneda clicada
             }
             i++;
@@ -248,8 +249,18 @@ public class PanelExpendedor extends JPanel{
         yDestino = 100;
         repaint();
     }
+    public void vuelto(int faltante){
+        int temp = -faltante/100;
+        for (int i = 0; i < temp; i++) {
+            agregarMonedaVuelto(new Moneda100());
+        }
+        repaint();
+    }
 
     public List<Product> getProductosDisponibles(){
         return productosDisponibles;
+    }
+    public Deposito<Moneda> getMDeposito(){
+        return mDeposito;
     }
 }

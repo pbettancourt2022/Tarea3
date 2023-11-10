@@ -31,14 +31,6 @@ public class PanelPrincipal extends JPanel {
         this.add(comprador);
         this.add(expendedor);
 
-
-        //Se calcula cuantas monedas deben de haber en el vuelto
-        int vuel=c.cuantoVuelto()/100;
-//        for (int i = 0; i < vuel; i++) {
-//            Moneda100 moneda = new Moneda100();
-//            expendedor.agregarMonedaVuelto(moneda);
-//        }
-
         // Agrega el MouseListener
         addMouseListener(new MouseAdapter() {
             @Override
@@ -55,6 +47,12 @@ public class PanelPrincipal extends JPanel {
     public void paint(Graphics g) {
         super.paint(g);
     }
+
+    /** Metodo para manejar los clicks en todas las ventanas, manda las coordenadas del click a los otros paneles.
+     *
+     * @param x coordenada X del click.
+     * @param y coordenada Y del click.
+     */
     public void handleMouseClick(int x, int y){
         expendedor.handleClick(x, y);
         comprador.handleClick(x, y);
