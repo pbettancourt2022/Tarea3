@@ -12,17 +12,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PanelExpendedor extends JPanel{
+    /** Marca las monedas que entrega de vuelto para pintarlas en el panel */
     private List<Moneda> monedasVuelto;
+    /** Marca la moneda a sacar del depósito de monedas */
     private List<Moneda> monedasParaEliminar = new ArrayList<>();
-    private List<Product> productosParaEliminar = new ArrayList<>();
     /** ArrayList que maneja otras ArrayLists de productos, representa los productos que se ven en el expendedor */
     private ArrayList<ArrayList<Product>> productosDisponibles;
-    private Product productoAMover;
-    /** Deposito de monedas en el cual se guardan todas las monedas que se hayan usado en los pagos */
+    /** Marca el producto a sacar del depósito de productos */
+    private List<Product> productosParaEliminar = new ArrayList<>();
+    /** Marca el producto que se mueve al depósito de productos */
     private Deposito<Moneda> mDeposito;
     /** Instancia de Expendedor, se usa para crear los productos */
     private Expendedor expendedor;
     /** Coordenada X de destino para el deposito de bebidas */
+    private Product productoAMover;
+    /** Deposito de monedas en el cual se guardan todas las monedas que se hayan usado en los pagos */
     private int xDestino;
     /** Coordenada Y de destino para el deposito de bebidas */
     private int yDestino;
@@ -65,9 +69,15 @@ public class PanelExpendedor extends JPanel{
         productosDisponibles.add(depSuper8);
 
     }
+    /** Método que usamos para agregar monedas a la lista de monedas que se entregarán de vuelto */
     public void agregarMonedaVuelto(Moneda moneda) {
         monedasVuelto.add(moneda);
     }
+
+    /** Método que pinta el PanelExpendedor, lo que lo diferencia del resto es que este también se hace cargo de
+     * pintar los productos y las monedas después del pago.
+     * @param g the <code>Graphics</code> context in which to paint
+     */
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -141,20 +151,6 @@ public class PanelExpendedor extends JPanel{
         }
         xProducto = 150;
         yProducto += 110;
-        for (Product producto : productosDisponibles) {
-            if (!productosParaEliminar.contains(producto)&& producto.getSerie()<400&&producto.getSerie()>=300) {
-
-                g.setColor(Color.orange);
-                g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
-                g.setColor(Color.orange);
-                g.fillRoundRect(xProducto, (yProducto + 25), 50, 35, 10, 10);
-                g.setColor(Color.black);
-                g.fillRoundRect(xProducto, (yProducto + 25), 50, 10, 10, 10);
-                xProducto += 80;
-            }
-        }
-        xProducto = 150;
-        yProducto += 110;
         for (ArrayList<Product> productArrayList : productosDisponibles) {
             for (Product producto : productArrayList) {
                 if (!productosParaEliminar.contains(producto) && producto.getSerie() < 400 && producto.getSerie() >= 300) {
@@ -163,6 +159,21 @@ public class PanelExpendedor extends JPanel{
                     g.setColor(Color.orange);
                     g.fillRoundRect(xProducto, (yProducto + 25), 50, 35, 10, 10);
                     g.setColor(Color.black);
+                    g.fillRoundRect(xProducto, (yProducto + 25), 50, 10, 10, 10);
+                    xProducto += 80;
+                }
+            }
+        }
+        xProducto = 150;
+        yProducto += 110;
+        for (ArrayList<Product> productArrayList : productosDisponibles) {
+            for (Product producto : productArrayList) {
+                if (!productosParaEliminar.contains(producto) && producto.getSerie() < 500 && producto.getSerie() >= 400) {
+                    g.setColor(Color.black);
+                    g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
+                    g.setColor(Color.black);
+                    g.fillRoundRect(xProducto, (yProducto + 25), 50, 35, 10, 10);
+                    g.setColor(Color.white);
                     g.fillRoundRect(xProducto, (yProducto + 25), 50, 10, 10, 10);
                     xProducto += 80;
                 }
@@ -233,6 +244,11 @@ public class PanelExpendedor extends JPanel{
 
     }
 
+    /** Método que tiene el fin de eliminar monedas y productos de sus respectivos depósitos ocupando
+     * las coordenadas del click
+     * @param x coordenada X del click
+     * @param y coordenada Y del click
+     */
     public void handleClick(int x, int y) {
         int i=0;
         for (Moneda moneda : monedasVuelto) {
@@ -246,11 +262,11 @@ public class PanelExpendedor extends JPanel{
             int yMoneda = 635;
 
             if (x >= xMoneda && x <= xMoneda + 20 && y >= yMoneda && y <= yMoneda + 20) {
-                // El clic ocurrió en esta moneda, así que márcala para eliminar
                 monedasParaEliminar.add(moneda);
-                repaint();  // Vuelve a pintar el panel para que la moneda desaparezca
+                repaint();
+
                 System.out.println("El valor de la moneda es: $"+moneda.getValor());
-                break;  // Puedes romper el bucle si ya encontraste la moneda clicada
+                break;
             }
             i++;
         }
@@ -261,14 +277,38 @@ public class PanelExpendedor extends JPanel{
         }
     }
 
-
-    public void botonCompra(){
-        productoAMover = productosDisponibles.get(0);  // Esto seleccionará el primer producto disponible, adapta según tus necesidades
-        productosDisponibles.remove(0);
+    /** Método que tiene el único propósito de exportar la ubicación de los productos al comprador.
+     * @param seleccion integer que ocupamos para seleccionar el producto deseado.
+     */
+    public void botonCompra(int seleccion){
+        if(seleccion == 1) {
+            productoAMover = productosDisponibles.get(0).get(0);  // Esto seleccionará el primer producto disponible, adapta según tus necesidades
+            productosDisponibles.get(0).remove(0);
+        }
+        if(seleccion == 2) {
+            productoAMover = productosDisponibles.get(1).get(0);  // Esto seleccionará el primer producto disponible, adapta según tus necesidades
+            productosDisponibles.get(1).remove(0);
+        }
+        if(seleccion == 3) {
+            productoAMover = productosDisponibles.get(2).get(0);  // Esto seleccionará el primer producto disponible, adapta según tus necesidades
+            productosDisponibles.get(2).remove(0);
+        }
+        if(seleccion == 4) {
+            productoAMover = productosDisponibles.get(3).get(0);  // Esto seleccionará el primer producto disponible, adapta según tus necesidades
+            productosDisponibles.get(3).remove(0);
+        }
+        if(seleccion == 5) {
+            productoAMover = productosDisponibles.get(4).get(0);  // Esto seleccionará el primer producto disponible, adapta según tus necesidades
+            productosDisponibles.get(4).remove(0);
+        }
         xDestino = 100;
         yDestino = 100;
         repaint();
     }
+
+    /** Método para calcular el vuelto que se debe entregar en forma de monedas en el expendedor
+     * @param faltante integer que representa cuanto se ha pagado del costo del producto, debe ser negativa si entrega vuelto
+     */
     public void vuelto(int faltante){
         int temp = -faltante/100;
         for (int i = 0; i < temp; i++) {
@@ -277,7 +317,7 @@ public class PanelExpendedor extends JPanel{
         repaint();
     }
 
-    public List<Product> getProductosDisponibles(){
+    public ArrayList<ArrayList<Product>> getProductosDisponibles(){
         return productosDisponibles;
     }
     public Deposito<Moneda> getMDeposito(){

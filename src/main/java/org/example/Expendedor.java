@@ -45,7 +45,6 @@ public class Expendedor {
     public Product comprarProducto(Moneda m, int cual)throws PagoIncorrectoException, NoHayProductoException, PagoInsuficienteException  {
         Product producto = null;
         Deposito temp = null;
-        DepositoProducto depositoProducto= new DepositoProducto();
         int precio = 0;
         /**
          * En este if statement se define cual es el producto seleccionado
@@ -98,8 +97,7 @@ public class Expendedor {
             }
         }
         if (producto != null) {
-            // Depositar el producto en un depósito especial
-            depositoProducto.addProducto(producto);
+            return null;
         }
         return producto;
     }

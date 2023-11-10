@@ -191,7 +191,7 @@ public class PanelComprador extends JPanel {
         botonMoverProducto.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
                 if(faltante <= 0 && seleccion != 0) {
-                    expendedor.botonCompra();
+                    expendedor.botonCompra(seleccion);
                     expendedor.vuelto(faltante);
                     PanelComprador.this.repaint();
                     repaint();
