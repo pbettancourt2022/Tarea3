@@ -124,7 +124,7 @@ public class Expendedor {
         }
         return null; // Devuelve null si no se encuentra el producto
     }
-     public int setNumproductos(){
+     public int getNumproductos(){
         return numproductos;
     }
 

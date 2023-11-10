@@ -8,7 +8,7 @@ import panels.PanelExpendedor;
  * @author Pablo Bettancourt
  * @author Javier Morales
  *
- * @version 0.91 02 de noviembre 2023
+ * @version 0.99 09 de noviembre 2023
  */
 
 public class Main {
@@ -17,25 +17,8 @@ public class Main {
          * Notar que, según las instrucciones de la tarea, lo único necesario en el main es
          * una instancia de Ventana
          * */
-        Expendedor exp = new Expendedor(9);
-        Moneda m= null;
-        Comprador c = null;
-        Moneda moneda;
-        for (int i = 0; i < 3; i++) {
-            moneda = new Moneda1500();
-            try {
-                m= moneda;
-                c = new Comprador(m, Productos.COCACOLA.getNumero(), exp);
-                System.out.println(c.queBebiste() + " $" + c.cuantoVuelto());
-            } catch (NoHayProductoException e) {
-                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
-            } catch (PagoInsuficienteException e) {
-                System.out.println("Error: " + e.getMessage()+" Vuelto: $"+ moneda.getValor());
-            } catch (PagoIncorrectoException e) {
-                System.out.println("Error: " + e.getMessage());
-            }
-        }
-        Ventana v = new Ventana(exp,c);
+
+        Ventana v = new Ventana();
 
     }
 }

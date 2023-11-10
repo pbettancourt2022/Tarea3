@@ -1,9 +1,5 @@
 package panels;
 
-import org.example.Comprador;
-import org.example.Expendedor;
-import org.example.Moneda;
-import org.example.Moneda100;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,11 +7,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/** Clase principal del proyecto, contiene al resto de paneles e implementa el mouseListener para toda la ventana*/
 public class PanelPrincipal extends JPanel {
+    /** Instancia de PanelExpendedor*/
     private PanelExpendedor expendedor;
+    /** Instancia de PanelComprador*/
     private PanelComprador comprador;
 
-    public PanelPrincipal(Expendedor exp, Comprador c) {
+    /** Constructor de la clase, crea los paneles y utiliza el método handleMouseClick para uso del resto de paneles */
+    public PanelPrincipal() {
         super();
         this.setBackground(Color.WHITE);
         this.setLayout(null);
@@ -23,7 +23,7 @@ public class PanelPrincipal extends JPanel {
         this.setPreferredSize(new Dimension(1920,1080));
 
         // Crea y agrega los paneles, el orden es importante
-        expendedor = new PanelExpendedor(exp);
+        expendedor = new PanelExpendedor();
         comprador = new PanelComprador(expendedor);
         comprador.setPreferredSize(new Dimension(380, 530));
         comprador.setBounds(920, 40, 380, 530);

@@ -14,44 +14,55 @@ import java.util.List;
 public class PanelExpendedor extends JPanel{
     private List<Moneda> monedasVuelto;
     private List<Moneda> monedasParaEliminar = new ArrayList<>();
-    private List<Product> productosDisponibles;
     private List<Product> productosParaEliminar = new ArrayList<>();
+    /** ArrayList que maneja otras ArrayLists de productos, representa los productos que se ven en el expendedor */
+    private ArrayList<ArrayList<Product>> productosDisponibles;
+    private Product productoAMover;
     /** Deposito de monedas en el cual se guardan todas las monedas que se hayan usado en los pagos */
     private Deposito<Moneda> mDeposito;
+    /** Instancia de Expendedor, se usa para crear los productos */
     private Expendedor expendedor;
-    private Product productoAMover;
     /** Coordenada X de destino para el deposito de bebidas */
     private int xDestino;
     /** Coordenada Y de destino para el deposito de bebidas */
     private int yDestino;
 
-
-    public PanelExpendedor(Expendedor exp) {
-        System.out.println(exp.getVuelto());
-        this.expendedor = exp;
+    /** Constructor de la clase, su funcionalidad es crear "mágicamente" los productos dentro del panel */
+    public PanelExpendedor() {
+        this.expendedor = new Expendedor(9);
         this.setLayout(new BorderLayout());
         mDeposito = new Deposito<>();
         monedasVuelto = new ArrayList<>();
-        productosDisponibles = new ArrayList();
+        productosDisponibles = new ArrayList<>();
         productoAMover = null;
 
-
+        // Crea arraylists que representan las filas de productos
+        ArrayList<Product> depCoca = new ArrayList<>();
+        ArrayList<Product> depSprite = new ArrayList<>();
+        ArrayList<Product> depFanta = new ArrayList<>();
+        ArrayList<Product> depSnickers = new ArrayList<>();
+        ArrayList<Product> depSuper8 = new ArrayList<>();
         // Agrega productos a la lista de productos disponibles
-        for(int i = 0; i < expendedor.setNumproductos(); i++){
-            productosDisponibles.add(new CocaCola(i + 100));
+        for(int i = 0; i < expendedor.getNumproductos(); i++){
+            depCoca.add(new CocaCola(i + 100));
         }
-        for(int i = 0; i < expendedor.setNumproductos(); i++){
-            productosDisponibles.add(new Sprite(i + 200));
+        for(int i = 0; i < expendedor.getNumproductos(); i++){
+            depSprite.add(new Sprite(i + 200));
         }
-        for(int i = 0; i < expendedor.setNumproductos(); i++){
-            productosDisponibles.add(new Fanta(i+300));
+        for(int i = 0; i < expendedor.getNumproductos(); i++){
+            depFanta.add(new Fanta(i+300));
         }
-        for(int i = 0; i < expendedor.setNumproductos(); i++){
-            productosDisponibles.add(new Snickers(i+400));
+        for(int i = 0; i < expendedor.getNumproductos(); i++){
+            depSnickers.add(new Snickers(i+400));
         }
-        for(int i = 0; i < expendedor.setNumproductos(); i++){
-            productosDisponibles.add(new Super8(i+500));
+        for(int i = 0; i < expendedor.getNumproductos(); i++){
+            depSuper8.add(new Super8(i+500));
         }
+        productosDisponibles.add(depCoca);
+        productosDisponibles.add(depSprite);
+        productosDisponibles.add(depFanta);
+        productosDisponibles.add(depSnickers);
+        productosDisponibles.add(depSuper8);
 
     }
     public void agregarMonedaVuelto(Moneda moneda) {
@@ -97,30 +108,35 @@ public class PanelExpendedor extends JPanel{
         // Dibuja los productos en filas y columnas
         int xProducto = 150;
         int yProducto = 60;
-        int productosPorFila = expendedor.setNumproductos();
-        for (Product producto : productosDisponibles) {
-            if (!productosParaEliminar.contains(producto)&& producto.getSerie()<200) {
-                g.setColor(Color.red);
-                g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
-                g.setColor(Color.red);
-                g.fillRoundRect(xProducto, (yProducto+25), 50, 35, 10, 10);
-                g.setColor(Color.black);
-                g.fillRoundRect(xProducto, (yProducto+25), 50, 10, 10, 10);
-                // Calcula las coordenadas del siguiente producto en la fila actual
-                xProducto += 80;
+        int productosPorFila = expendedor.getNumproductos();
+        for (ArrayList<Product> productArrayList : productosDisponibles) {
+            for (Product producto : productArrayList) {
+                if (!productosParaEliminar.contains(producto) && producto.getSerie() < 200) {
+                    g.setColor(Color.red);
+                    g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
+                    g.setColor(Color.red);
+                    g.fillRoundRect(xProducto, (yProducto + 25), 50, 35, 10, 10);
+                    g.setColor(Color.black);
+                    g.fillRoundRect(xProducto, (yProducto + 25), 50, 10, 10, 10);
+                    // Calcula las coordenadas del siguiente producto en la fila actual
+                    xProducto += 80;
+                }
             }
         }
+
         xProducto = 150;
         yProducto += 110;
-        for (Product producto : productosDisponibles) {
-            if (!productosParaEliminar.contains(producto)&& producto.getSerie()<300&&producto.getSerie()>=200) {
-                g.setColor(Color.green);
-                g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
-                g.setColor(Color.green);
-                g.fillRoundRect(xProducto, (yProducto + 25), 50, 35, 10, 10);
-                g.setColor(Color.white);
-                g.fillRoundRect(xProducto, (yProducto + 25), 50, 10, 10, 10);
-                xProducto += 80;
+        for (ArrayList<Product> productArrayList : productosDisponibles) {
+            for (Product producto : productArrayList) {
+                if (!productosParaEliminar.contains(producto) && producto.getSerie() < 300 && producto.getSerie() >= 200) {
+                    g.setColor(Color.green);
+                    g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
+                    g.setColor(Color.green);
+                    g.fillRoundRect(xProducto, (yProducto + 25), 50, 35, 10, 10);
+                    g.setColor(Color.white);
+                    g.fillRoundRect(xProducto, (yProducto + 25), 50, 10, 10, 10);
+                    xProducto += 80;
+                }
             }
         }
         xProducto = 150;
@@ -139,29 +155,33 @@ public class PanelExpendedor extends JPanel{
         }
         xProducto = 150;
         yProducto += 110;
-        for (Product producto : productosDisponibles) {
-            if (!productosParaEliminar.contains(producto)&& producto.getSerie()<500&&producto.getSerie()>=400) {
-
-                g.setColor(Color.BLACK);
-                g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
-                g.setColor(Color.BLACK);
-                g.fillRoundRect(xProducto, (yProducto + 25), 50, 35, 10, 10);
-                g.setColor(Color.white);
-                g.fillRoundRect(xProducto, (yProducto + 25), 50, 10, 10, 10);
-                xProducto += 80;
+        for (ArrayList<Product> productArrayList : productosDisponibles) {
+            for (Product producto : productArrayList) {
+                if (!productosParaEliminar.contains(producto) && producto.getSerie() < 400 && producto.getSerie() >= 300) {
+                    g.setColor(Color.orange);
+                    g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
+                    g.setColor(Color.orange);
+                    g.fillRoundRect(xProducto, (yProducto + 25), 50, 35, 10, 10);
+                    g.setColor(Color.black);
+                    g.fillRoundRect(xProducto, (yProducto + 25), 50, 10, 10, 10);
+                    xProducto += 80;
+                }
             }
         }
+
         xProducto = 150;
         yProducto += 110;
-        for (Product producto : productosDisponibles) {
-            if (!productosParaEliminar.contains(producto)&& producto.getSerie()<600&&producto.getSerie()>=500) {
-                g.setColor(Color.BLACK);
-                g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
-                g.setColor(Color.BLACK);
-                g.fillRoundRect(xProducto, (yProducto + 25), 50, 35, 10, 10);
-                g.setColor(Color.red);
-                g.fillRoundRect(xProducto, (yProducto + 25), 50, 10, 10, 10);
-                xProducto += 80;
+        for (ArrayList<Product> productArrayList : productosDisponibles) {
+            for (Product producto : productArrayList) {
+                if (!productosParaEliminar.contains(producto) && producto.getSerie() < 600 && producto.getSerie() >= 500) {
+                    g.setColor(Color.BLACK);
+                    g.fillRoundRect(xProducto, yProducto, 50, 35, 10, 10); // Ejemplo de un rectángulo redondeado
+                    g.setColor(Color.BLACK);
+                    g.fillRoundRect(xProducto, (yProducto + 25), 50, 35, 10, 10);
+                    g.setColor(Color.red);
+                    g.fillRoundRect(xProducto, (yProducto + 25), 50, 10, 10, 10);
+                    xProducto += 80;
+                }
             }
         }
         xProducto = 490;

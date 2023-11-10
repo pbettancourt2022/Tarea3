@@ -20,6 +20,11 @@ public class PanelComprador extends JPanel {
     private JLabel lPago2;
     /** Instancia del PanelExpendedor usado en el proyecto, la utilizamos para acceder a las variables dento del expendedor */
     private PanelExpendedor expendedor;
+
+    /** Constructor de la clase, crea todos los botones ocupados en el proyecto para la compra; implementa el método
+     * de pago y la selección de producto.
+     * @param expendedor instancia de PanelExpendedor, se usa para manipular los productos dentro de este
+     */
     public PanelComprador(PanelExpendedor expendedor){
         super();
         this.expendedor = expendedor;
