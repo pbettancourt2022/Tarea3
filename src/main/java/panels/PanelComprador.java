@@ -1,19 +1,46 @@
 package panels;
+import org.example.Productos;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionEvent;
 
-public class PanelComprador extends JPanel implements MouseListener {
-    private JLabel lPago;
-    public PanelComprador(){
+public class PanelComprador extends JPanel {
+    /** Int que se usa para seleccionar el producto */
+    private int seleccion;
+    /** Int que otorga el pago restante en la transacción */
+    private int faltante;
+    /** JLabel con el fin de dar a conocer el estado de la transacción */
+    private JLabel lPago1;
+    /** Jlabel que presenta cuanto falta por pagar*/
+    private JLabel lPago2;
+    /** Instancia del PanelExpendedor usado en el proyecto, la utilizamos para acceder a las variables dento del expendedor */
+    private PanelExpendedor expendedor;
+    public PanelComprador(PanelExpendedor expendedor){
         super();
-        setBackground(Color.yellow);
+        this.expendedor = expendedor;
         setBounds(920,40,380,530);
         this.setLayout(null);
+
+        // Panel con la situacion del pago
+        JPanel pPago = new JPanel(new FlowLayout());
+        pPago.setBounds(285, 400, 95,80);
+
+        lPago1 = new JLabel();
+        lPago1.setText(null);
+        lPago1.setForeground(Color.GREEN);
+        lPago1.setBounds(290, 400, 95,90);
+        lPago2 = new JLabel();
+        lPago2.setText(null);
+        lPago2.setForeground(Color.RED);
+        lPago2.setBounds(290,420,95,90);
+
+
+        pPago.add(lPago1, BorderLayout.NORTH);
+        pPago.add(lPago2, BorderLayout.SOUTH);
+
+        this.add(pPago);
 
         // Botones de los Productos
         JPanel botones = new JPanel();
@@ -31,6 +58,50 @@ public class PanelComprador extends JPanel implements MouseListener {
         JButton b5 = new JButton("Super8");
         b5.setBounds(0, 280, 380, 60);
 
+        // Acciones de los botones
+        b1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seleccion = 1;
+                lPago1.setText("Pendiente");
+                lPago2.setText(String.valueOf(Productos.COCACOLA.getPrecio()));
+            }
+        });
+        b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seleccion = 2;
+                lPago1.setText("Pendiente");
+                lPago2.setText(String.valueOf(Productos.SPRITE.getPrecio()));
+            }
+        });
+        b3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seleccion = 3;
+                lPago1.setText("Pendiente");
+                lPago2.setText(String.valueOf(Productos.FANTA.getPrecio()));
+            }
+        });
+        b4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seleccion = 4;
+                lPago1.setText("Pendiente");
+                lPago2.setText(String.valueOf(Productos.SNICKERS.getPrecio()));
+            }
+        });
+        b5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                seleccion = 5;
+                lPago1.setText("Pendiente");
+
+                lPago2.setText(String.valueOf(Productos.SPRITE.getPrecio()));
+            }
+        });
+
+        // Agrega los botones
         botones.add(b1);
         botones.add(b2);
         botones.add(b3);
@@ -50,35 +121,54 @@ public class PanelComprador extends JPanel implements MouseListener {
         JButton m3 = new JButton("1000");
         m3.setBounds(180,400,95,80);
 
+        // Acciones de los botones
+        m1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        m2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        m3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
         bMonedas.add(m1);
         bMonedas.add(m2);
         bMonedas.add(m3);
 
         this.add(bMonedas);
 
-        // Panel con la situacion del pago
-
-        JPanel pPago = new JPanel(new FlowLayout());
-        pPago.setBounds(285, 400, 95,80);
-
-        lPago = new JLabel();
-        lPago.setText("test");
-        lPago.setForeground(Color.GREEN);
-        lPago.setBounds(290, 400, 95,90);
-        pPago.add(lPago, BorderLayout.CENTER);
-        this.add(pPago);
         // Boton para comprar
-
+        JPanel panelBoton = new JPanel(null);
+        panelBoton.setBounds(0,480,380,50);
+        JButton botonMoverProducto = new JButton("Mover Producto");
+        botonMoverProducto.setBounds(0,0,380,50);
+        panelBoton.add(botonMoverProducto);
+        botonMoverProducto.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e){
+                expendedor.botonCompra();
+                repaint();
+            }
+        });
+        this.add(panelBoton);
     }
     @Override
     public void paint(Graphics g) {
         super.paint(g);
     }
 
-    public void mouseClicked(MouseEvent e){System.out.println("boton presionado");}
-    public void mousePressed(MouseEvent e){}
-    public void mouseReleased(MouseEvent e){}
-    public void mouseEntered(MouseEvent e){}
-    public void mouseExited(MouseEvent e){}
+    public void handleClick(int x, int y){
+
+        repaint();
+    }
 
 }

@@ -11,11 +11,13 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PanelExpendedor extends JPanel implements MouseListener {
+public class PanelExpendedor extends JPanel{
     private List<Moneda> monedasVuelto;
     private List<Moneda> monedasParaEliminar = new ArrayList<>();
     private List<Product> productosDisponibles;
     private List<Product> productosParaEliminar = new ArrayList<>();
+    /** Deposito de monedas en el cual se guardan todas las monedas que se hayan usado en los pagos */
+    private Deposito<Moneda> mDeposito;
     private Expendedor expendedor;
     private Product productoAMover;
     private int xDestino; // Coordenada X de destino
@@ -25,6 +27,7 @@ public class PanelExpendedor extends JPanel implements MouseListener {
         System.out.println(exp.getVuelto());
         this.expendedor = exp;
         this.setLayout(new BorderLayout());
+        mDeposito = new Deposito<>();
         monedasVuelto = new ArrayList<>();
         productosDisponibles = new ArrayList();
         productoAMover = null;
@@ -46,22 +49,7 @@ public class PanelExpendedor extends JPanel implements MouseListener {
         for(int i = 0; i < expendedor.setNumproductos(); i++){
             productosDisponibles.add(new Super8(i+500));
         }
-        JPanel panelBoton = new JPanel(null);
-        this.add(panelBoton, BorderLayout.CENTER);
-        JButton botonMoverProducto = new JButton("Mover Producto");
-        botonMoverProducto.setBounds(920, 520, 380, 50);
-        panelBoton.add(botonMoverProducto);
-        botonMoverProducto.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                productoAMover = productosDisponibles.get(0);  // Esto seleccionará el primer producto disponible, adapta según tus necesidades
-                productosDisponibles.remove(0);
-                xDestino = 100;
-                yDestino = 100;
 
-                repaint();
-
-            }
-        });
     }
     public void agregarMonedaVuelto(Moneda moneda) {
         monedasVuelto.add(moneda);
@@ -221,13 +209,7 @@ public class PanelExpendedor extends JPanel implements MouseListener {
 
 
     }
-    public void mouseClicked(MouseEvent e) {
 
-    }
-    public void mousePressed(MouseEvent e){}
-    public void mouseReleased(MouseEvent e){}
-    public void mouseEntered(MouseEvent e){}
-    public void mouseExited(MouseEvent e){}
     public void handleClick(int x, int y) {
 
         System.out.println("handleClick llamado con x=" + x + " y=" + y);
@@ -259,7 +241,13 @@ public class PanelExpendedor extends JPanel implements MouseListener {
     }
 
 
-
+    public void botonCompra(){
+        productoAMover = productosDisponibles.get(0);  // Esto seleccionará el primer producto disponible, adapta según tus necesidades
+        productosDisponibles.remove(0);
+        xDestino = 100;
+        yDestino = 100;
+        repaint();
+    }
 
     public List<Product> getProductosDisponibles(){
         return productosDisponibles;

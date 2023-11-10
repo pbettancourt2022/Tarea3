@@ -22,18 +22,14 @@ public class PanelPrincipal extends JPanel {
         this.setBounds(0,0,1920,1080);
         this.setPreferredSize(new Dimension(1920,1080));
 
-
-
-        comprador = new PanelComprador();
+        // Crea y agrega los paneles, el orden es importante
+        expendedor = new PanelExpendedor(exp);
+        comprador = new PanelComprador(expendedor);
         comprador.setPreferredSize(new Dimension(380, 530));
         comprador.setBounds(920, 40, 380, 530);
-        this.add(comprador);
-        // Crea, configura y agrega el PanelExpendedor
-        expendedor = new PanelExpendedor(exp);
         expendedor.setBounds(0, 0, 1920, 1080);
+        this.add(comprador);
         this.add(expendedor);
-
-        // Crea y configura el PanelComprador
 
 
         //Se calcula cuantas monedas deben de haber en el vuelto
@@ -43,30 +39,27 @@ public class PanelPrincipal extends JPanel {
 //            expendedor.agregarMonedaVuelto(moneda);
 //        }
 
-
-
         // Agrega el MouseListener
-//        expendedor.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                int x = e.getX();
-//                int y = e.getY();
-//
-//                expendedor.handleClick(x, y);
-//            }
-//        });
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int x = e.getX();
+                int y = e.getY();
 
-
+                handleMouseClick(x, y);
+            }
+        });
     }
 
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-
-        // Dibuja la máquina expendedora y el comprador
-//        expendedor.paint(g);
-
     }
+    public void handleMouseClick(int x, int y){
+        expendedor.handleClick(x, y);
+        comprador.handleClick(x, y);
+    }
+
     public PanelExpendedor getExpendedor(){return expendedor;}
     public PanelComprador getComprador(){return comprador;}
 
